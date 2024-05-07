@@ -23,7 +23,7 @@ genre.list=c(
 ui <- grid_page(
   layout = c(
     "header      header",
-    "sidebar     plotly",
+    "sidebar     plot",
     "recommend   table "
   ),
   gap_size = "1rem",
@@ -90,7 +90,7 @@ ui <- grid_page(
     card_body(DTOutput(outputId = "myTable", width = "100%"))
   ),
   grid_card(
-    area = "plotly",
+    area = "plot",
     card_body(
       plotlyOutput(
         outputId = "myPlot",
@@ -99,6 +99,16 @@ ui <- grid_page(
       )
     )
   ),
+  # grid_card(
+  #   area = "plot",
+  #   card_body(
+  #     plotOutput(
+  #       outputId = "myPlot",
+  #       width = "100%",
+  #       height = "100%"
+  #     )
+  #   )
+  # ),
   grid_card(
     area = "recommend",
     full_screen = TRUE,
@@ -119,12 +129,20 @@ server <- function(input, output) {
                            })
   
   output$myPlot <- renderPlotly({
-    plot_ly(data=selectedData(), x = ~ get(input$input.x), y= ~ get(input$input.y), 
-            color= ~ Genre, colors = "BrBG" , 
+    plot_ly(data=selectedData(), x = ~ get(input$input.x), y= ~ get(input$input.y),
+            color= ~ Genre, colors = "BrBG" ,
             text= ~ Title ,
-            type = ifelse(input$input.x=="Genre","box","scatter")) %>% 
-                 layout( xaxis = list(title = input$input.x) , yaxis = list(title = input$input.y))
+            type = ifelse(input$input.x=="Genre","box","scatter")) %>%
+      layout( xaxis = list(title = input$input.x) , yaxis = list(title = input$input.y))
   })
+  
+  # output$myPlot <- renderPlot({
+  #      selectedData() %>% ggplot(aes(x =get(input$input.x), y= get(input$input.y), colour = Genre)) + 
+  #                              labs(x=input$input.x,y=input$input.y )  +
+  #                              scale_colour_brewer(palette ="BrBG")  +
+  #                              theme_minimal()+
+  #                              if(input$input.x=="Genre"){geom_boxplot()} else {geom_point()}  
+  # })
   
   output$myTable <- renderDT({
     if(input$input.x != "Genre"){

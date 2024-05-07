@@ -18,12 +18,12 @@ genre.list=c(
   "Action",
   "Animation",
   "Sci-Fi"
-  )
+)
 
 ui <- grid_page(
   layout = c(
     "header      header",
-    "sidebar     plotly",
+    "sidebar     plot",
     "recommend   table "
   ),
   gap_size = "1rem",
@@ -90,7 +90,7 @@ ui <- grid_page(
     card_body(DTOutput(outputId = "myTable", width = "100%"))
   ),
   grid_card(
-    area = "plotly",
+    area = "plot",
     card_body(
       plotlyOutput(
         outputId = "myPlot",
@@ -99,6 +99,16 @@ ui <- grid_page(
       )
     )
   ),
+  # grid_card(
+  #   area = "plot",
+  #   card_body(
+  #     plotOutput(
+  #       outputId = "myPlot",
+  #       width = "100%",
+  #       height = "100%"
+  #     )
+  #   )
+  # ),
   grid_card(
     area = "recommend",
     full_screen = TRUE,
@@ -109,4 +119,3 @@ ui <- grid_page(
     )
   )
 )
-
