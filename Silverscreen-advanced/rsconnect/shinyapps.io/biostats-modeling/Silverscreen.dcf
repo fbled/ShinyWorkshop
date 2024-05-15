@@ -1,0 +1,12 @@
+name: Silverscreen
+title: Silverscreen
+username: biostats-modeling
+account: biostats-modeling
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11925395
+bundleId: 8593648
+url: https://biostats-modeling.shinyapps.io/Silverscreen/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
